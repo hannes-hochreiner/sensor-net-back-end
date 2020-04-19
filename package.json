@@ -1,0 +1,35 @@
+{
+  "name": "sensor-net-back-end",
+  "version": "1.0.0",
+  "description": "A back end for the Sensor Net project.",
+  "main": "bld/index.js",
+  "scripts": {
+    "test": "npm run build; npm run build_test; node bld_test/run_jasmine.js",
+    "build": "rm -r ./bld; babel src -d bld",
+    "build_test": "rm -r ./bld_test; babel src_test -d bld_test",
+    "start": "npm run build; PGUSER=sys PGPASSWORD=sys PGDATABASE=sensornet node bld/index.js",
+    "clear": "rm -r ./node_modules",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hannes-hochreiner/sensor-net-back-end.git"
+  },
+  "author": "Hannes Hochreiner <hannes@hochreiner.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hannes-hochreiner/sensor-net-back-end/issues"
+  },
+  "homepage": "https://github.com/hannes-hochreiner/sensor-net-back-end#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.0.2",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "jasmine": "^3.5.0"
+  }
+}
