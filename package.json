@@ -1,6 +1,6 @@
 {
   "name": "sensor-net-back-end",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A back end for the Sensor Net project.",
   "main": "bld/index.js",
   "scripts": {
