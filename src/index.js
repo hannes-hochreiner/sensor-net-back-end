@@ -1,5 +1,5 @@
 import {default as express} from 'express';
-import {dbGroup, putMessage, getMeasurementDataByStartEndTime, getAllEquipment, getAllSensors, getAllParameterTypes} from './middleware';
+import {dbGroup, putMessage, getMeasurementDataByStartEndTime, getAllEquipment, getAllSensors, getAllParameterTypes, logger} from './middleware';
 import {Pool} from 'pg';
 import {v4 as uuid} from 'uuid';
 import {Repo} from './repo';
@@ -11,6 +11,10 @@ const options = {repo: repo};
 
 app.use(express.json());
 app.use(dbGroup);
+
+if (process.env.DEBUG) {
+  app.use(logger);
+}
 // curl -H 'Content-Type: application/json' -H 'x-groups: db:ingres' -X PUT -d '{"type":"rfm","rssi":"-87","timestamp":"2020-04-18T15:59:56.071Z","message":{"mcuId": "mcuId1","index": 1524,"measurements":[{"sensorId":"be01","parameters":{"temperature":{"value":25.68000030517578,"unit":"°C"},"relativeHumidity":{"value":33.9677734375,"unit":"%"},"pressure":{"value":1001.1699829101562,"unit":"mbar"}}}]}}' localhost:8080/message
 // curl -H 'Content-Type: application/json' -H 'x-groups: db:ingres' -X PUT -d '{"type":"rfm","rssi":"-82","timestamp":"2020-04-30T15:59:56.071Z","message":{"mcuId": "mcuId1","index": 1525,"measurements":[{"sensorId":"be01","parameters":{"temperature":{"value":23.68000030517578,"unit":"°C"},"relativeHumidity":{"value":35.9677734375,"unit":"%"},"pressure":{"value":1002.1699829101562,"unit":"mbar"}}}]}}' localhost:8080/message
 app.put('/message', putMessage(options));

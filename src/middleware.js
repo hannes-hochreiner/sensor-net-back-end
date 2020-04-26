@@ -6,6 +6,11 @@ export function dbGroup(req, res, next) {
   next();
 }
 
+export function logger(req, res, next) {
+  console.log(req);
+  next();
+}
+
 export function putMessage(options) {
   return async function(req, res) {
     try {
